@@ -41,28 +41,35 @@
                 </div>
                 <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
                     <div class="h-100 bg-secondary p-5">
-                        <form>
+                        <form action="{{ route('registrar.store') }}" method="POST">
+                            @csrf
                             <div class="row g-3">
                                 <div class="col-12">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control bg-light border-0" id="name" placeholder="Nombre">
+                                        <input type="text" class="form-control bg-light border-0" id="first_name" placeholder="Nombre" name="first_name">
                                         <label for="name">Nombre</label>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control bg-light border-0" id="email" placeholder="Correo electronico">
+                                        <input type="text" class="form-control bg-light border-0" id="last_name" placeholder="Apellido(s)" name="last_name">
+                                        <label for="name">Apellido(s)</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control bg-light border-0" id="email" placeholder="Correo electronico" name="email">
                                         <label for="name">Correo Electrónico</label>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-floating">
-                                        <input type="password" class="form-control bg-light border-0" id="password" placeholder="Contraseña">
+                                        <input type="password" class="form-control bg-light border-0" id="password" placeholder="Contraseña" name="password">
                                         <label for="name">Contraseña</label>
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <button class="btn btn-primary px-5" style="height: 60px;">
+                                    <button class="btn btn-primary px-5" style="height: 60px;" type="submit">
                                         Registrar
                                         <div class="d-inline-flex btn-sm-square bg-white text-primary rounded-circle ms-2">
                                             <i class="fa fa-arrow-right"></i>
