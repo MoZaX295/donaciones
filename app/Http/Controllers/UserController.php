@@ -41,6 +41,11 @@ class UserController extends Controller
                 'last_name' => 'required|max:100',
                 'email' => 'required|email',
                 'password' => 'required|max:32',
+            ], [
+                'first_name.required' => 'Proporciona tu(s) nombre(s).',
+                'last_name.required' => 'Proporciona tu(s) apellido(s).',
+                'email.max' => 'Email con máximo 50 caracteres.',
+                'password.required' => 'Proporciona una contraseña.',
             ]);
             $user = new User();
             $user->first_name = $request->input('first_name');
@@ -55,7 +60,10 @@ class UserController extends Controller
                 $request->input('email'),
                 $request->input('password')
             ));
-            //return redirect()->route('donations.donations')->with('success', 'You message has been sent.');
+            session(['user_email' => $request->input('email')]);
+            return redirect()->route('donar.index')
+                     ->with('success', 'BIENVENIDO
+                     Se te envió un correo con tus datos, cuídalos.');
         }
     }
 

@@ -15,7 +15,7 @@
                     <a href="index.html" class="nav-item nav-link">Inicio</a>
                     <a href="donation.html" class="nav-item nav-link active">Donar</a>
                     <a href="donation.html" class="nav-item nav-link">Registrar</a>
-            </div>
+                </div>
         </nav>
     </div>
     <!-- Navbar End -->
@@ -39,36 +39,64 @@
                 <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
                     <div class="d-inline-block rounded-pill bg-secondary text-primary py-1 px-3 mb-3">Dona Ahora</div>
                     <h1 class="display-6 mb-5">Gracias por tu donación</h1>
-                    <div id="resumen" >
-                        <h3>Resumen de tu donación</h3>
-                        <p><strong>Tipo de Donación:</strong> <span id="summaryDonationType"></span></p>
-                        <p><strong>Cantidad:</strong> <span id="summaryQuantity"></span></p>
-                      </div>
+                    @if (session('donation_type') && session('quantity'))
+                        <div id="resumen">
+                            <h3>Resumen de tu donación</h3>
+                            <p><strong>Tipo de Donación:</strong> <span
+                                    id="summaryDonationType">{{ session('donation_type', 'No especificado') }}</span></p>
+                            <p><strong>Cantidad:</strong> <span id="summaryQuantity">{{ session('quantity', '0') }}</span>
+                            </p>
+                        </div>
+                    @else
+                        <div id="resumen" style="display: none;">
+                            <h3>Resumen de tu donación</h3>
+                            <p><strong>Tipo de Donación:</strong> <span id="summaryDonationType">No hay datos
+                                    disponibles.</span></p>
+                            <p><strong>Cantidad:</strong> <span id="summaryQuantity">0</span></p>
+                        </div>
+                    @endif
                 </div>
                 <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
                     <div class="h-100 bg-secondary p-5">
-                        <form>
+                        <form action="{{ route('donar.store') }}" method="POST">
+                            @csrf
+                            @if (session()->get('success'))
+                                <div class="alert alert-success text-center">
+                                    {{ session()->get('success') }}
+                                </div>
+                            @endif
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
                             <div class="row g-3">
                                 <div class="col-12">
                                     <div class="form-floating">
-                                        <select id="donationType" name="donationType" placeholder="Tipo de donación" class="form-control bg-light border-0">
+                                        <select id="donation_type" name="donation_type" placeholder="Tipo de donación"
+                                            class="form-control bg-light border-0">
                                             <option value="" disabled selected hidden></option>
-                                            <option value="opcion1">Alimentos</option>
-                                            <option value="opcion2">Medicinas</option>
-                                            <option value="opcion3">Ropa</option>
-                                            <option value="opcion4">Apoyo monetario</option>
-                                          </select>
+                                            <option value="1">Alimentos</option>
+                                            <option value="2">Medicinas</option>
+                                            <option value="3">Ropa</option>
+                                            <option value="4">Apoyo monetario</option>
+                                        </select>
                                         <label for="name">Tipo de Donación</label>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-floating">
-                                        <input type="number" class="form-control bg-light border-0" id="quantity" placeholder="Cantidad">
+                                        <input type="number" class="form-control bg-light border-0" id="quantity"
+                                            name="quantity" placeholder="Cantidad">
                                         <label for="quantity">Cantidad</label>
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <button class="btn btn-primary px-5" style="height: 60px;">
+                                    <button class="btn btn-primary px-5" style="height: 60px;" type="submit">
                                         Registrar Donación
                                         <div class="d-inline-flex btn-sm-square bg-white text-primary rounded-circle ms-2">
                                             <i class="fa fa-arrow-right"></i>

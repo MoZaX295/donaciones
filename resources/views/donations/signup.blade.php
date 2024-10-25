@@ -43,6 +43,20 @@
                     <div class="h-100 bg-secondary p-5">
                         <form action="{{ route('registrar.store') }}" method="POST">
                             @csrf
+                            @if (session()->get('success'))
+                                <div class="alert alert-success text-center">
+                                    {{ session()->get('success') }}
+                                </div>
+                            @endif
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
                             <div class="row g-3">
                                 <div class="col-12">
                                     <div class="form-floating">
