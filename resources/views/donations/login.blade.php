@@ -45,18 +45,33 @@
                 </div>
                 <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
                     <div class="h-100 bg-secondary p-5">
-                        <form>
+                    <form action="{{ route('iniciarsesion.store') }}" method="POST">
+                            @csrf
+                            @if (session()->get('success'))
+                                <div class="alert alert-success text-center">
+                                    {{ session()->get('success') }}
+                                </div>
+                            @endif
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
                             <div class="row g-3">
                                 <div class="col-12">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control bg-light border-0" id="email"
+                                        <input type="text" class="form-control bg-light border-0" name='email' id="email"
                                             placeholder="Correo electronico">
                                         <label for="name">Correo Electrónico</label>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-floating">
-                                        <input type="password" class="form-control bg-light border-0" id="password"
+                                        <input type="password" class="form-control bg-light border-0" name='password' id="password"
                                             placeholder="Contraseña">
                                         <label for="name">Contraseña</label>
                                     </div>
@@ -78,6 +93,6 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> 
     <!-- Login End -->
 @endsection
