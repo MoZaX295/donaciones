@@ -10,3 +10,6 @@ use Illuminate\Support\Facades\Route;
 Route::resource('registrar', UserController::class);
 Route::resource('donar', DonationController::class);
 Route::resource('iniciarsesion', LoginController::class);
+Route::get('/historial', function () {
+    return view('donations/record');
+});
