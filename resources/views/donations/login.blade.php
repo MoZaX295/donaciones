@@ -13,9 +13,8 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto p-4 p-lg-0">
                     <a href="index.html" class="nav-item nav-link">Inicio</a>
-                    <a href="donation.html" class="nav-item nav-link">Donar</a>
-                    <a href="donation.html" class="nav-item nav-link">Registrar</a>
-                    <a href="donation.html" class="nav-item nav-link  active">Iniciar Sesión</a>
+                    <a href="{{ route('registrar.index') }}" class="nav-item nav-link">Registrar</a>
+                    <a href="{{ route('iniciarsesion.index') }}" class="nav-item nav-link  active">Iniciar Sesión</a>
                 </div>
         </nav>
     </div>
@@ -93,6 +92,6 @@
                 </div>
             </div>
         </div>
-    </div> 
+    </div>
     <!-- Login End -->
 @endsection

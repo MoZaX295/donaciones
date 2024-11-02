@@ -17,7 +17,9 @@ class UserController extends Controller
      */
     public function index()
     {
+        session()->forget(['donation_type', 'quantity']);
         return view('donations.signup');
+
     }
 
 
@@ -39,12 +41,13 @@ class UserController extends Controller
             $request->validate([
                 'first_name' => 'required|max:100',
                 'last_name' => 'required|max:100',
-                'email' => 'required|email',
+                'email' => 'required|email|unique:users,email',
                 'password' => 'required|max:32',
             ], [
                 'first_name.required' => 'Proporciona tu(s) nombre(s).',
                 'last_name.required' => 'Proporciona tu(s) apellido(s).',
-                'email.max' => 'Email con máximo 50 caracteres.',
+                'email.required' => 'Proporciona tu correo electrónico con máximo 50 caracteres.',
+                'email.unique' => 'Este correo electrónico ya está en uso. Por favor, elige otro.',
                 'password.required' => 'Proporciona una contraseña.',
             ]);
             $user = new User();
@@ -60,7 +63,7 @@ class UserController extends Controller
                 $request->input('email'),
                 $request->input('password')
             ));
-            session(['user_email' => $request->input('email')]);
+            session(['user_email' => $request->input('email'), 'user_name' => $request->input('first_name'). " ". $request->input('last_name')]);
             return redirect()->route('donar.index')
                      ->with('success', 'BIENVENIDO
                      Se te envió un correo con tus datos, cuídalos.');

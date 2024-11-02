@@ -13,7 +13,8 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto p-4 p-lg-0">
                     <a href="" class="nav-item nav-link">Inicio</a>
-                    <a href="" class="nav-item nav-link active">Registrar</a>
+                    <a href="{{ route('registrar.index') }}" class="nav-item nav-link active">Registrar</a>
+                    <a href="{{ route('iniciarsesion.index') }}" class="nav-item nav-link">Iniciar Sesión</a>
             </div>
         </nav>
     </div>
@@ -60,19 +61,19 @@
                             <div class="row g-3">
                                 <div class="col-12">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control bg-light border-0" id="first_name" placeholder="Nombre" name="first_name">
+                                        <input type="text" class="form-control bg-light border-0" id="first_name" placeholder="Nombre" name="first_name" value="{{ old('first_name') }}">
                                         <label for="name">Nombre</label>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control bg-light border-0" id="last_name" placeholder="Apellido(s)" name="last_name">
+                                        <input type="text" class="form-control bg-light border-0" id="last_name" placeholder="Apellido(s)" name="last_name" value="{{ old('last_name') }}">
                                         <label for="name">Apellido(s)</label>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control bg-light border-0" id="email" placeholder="Correo electronico" name="email">
+                                        <input type="text" class="form-control bg-light border-0" id="email" placeholder="Correo electronico" name="email" value="{{ old('email') }}">
                                         <label for="name">Correo Electrónico</label>
                                     </div>
                                 </div>

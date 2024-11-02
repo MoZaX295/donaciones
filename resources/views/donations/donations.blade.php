@@ -14,7 +14,12 @@
                 <div class="navbar-nav ms-auto p-4 p-lg-0">
                     <a href="index.html" class="nav-item nav-link">Inicio</a>
                     <a href="donation.html" class="nav-item nav-link active">Donar</a>
-                    <a href="donation.html" class="nav-item nav-link">Registrar</a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-user"></i> <!-- Ícono de usuario -->
+                            {{ session('user_name', 'Usuario') }} <!-- Nombre del usuario -->
+                        </a>
+                    </li>
                 </div>
         </nav>
     </div>
@@ -38,21 +43,22 @@
             <div class="row g-5 align-items-center">
                 <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
                     <div class="d-inline-block rounded-pill bg-secondary text-primary py-1 px-3 mb-3">Dona Ahora</div>
-                    <h1 class="display-6 mb-5">Gracias por tu donación</h1>
+                    <h1 class="display-6 mb-5 ">Gracias por tu donación</h1>
                     @if (session('donation_type') && session('quantity'))
                         <div id="resumen">
-                            <h3>Resumen de tu donación</h3>
-                            <p><strong>Tipo de Donación:</strong> <span
+                            <h3 class="text-primary" class="text-primary">Resumen de tu donación</h3>
+                            <p style="color: #000; font-weight: bold;"><strong>Tipo de Donación:</strong> <span
                                     id="summaryDonationType">{{ session('donation_type', 'No especificado') }}</span></p>
-                            <p><strong>Cantidad:</strong> <span id="summaryQuantity">{{ session('quantity', '0') }}</span>
-                            </p>
+                            <p style="color: #000; font-weight: bold;"><strong>Cantidad:</strong> <span id="summaryQuantity">{{ session('quantity', '0') }}</span></p>
+                            <p style="color: #000; font-weight: bold;"><strong>Destino de donación:</strong> <span id="summaryRegion"></span></p>
                         </div>
                     @else
                         <div id="resumen" style="display: none;">
                             <h3>Resumen de tu donación</h3>
-                            <p><strong>Tipo de Donación:</strong> <span id="summaryDonationType">No hay datos
+                            <p style="color: #000; font-weight: bold;"><strong>Tipo de Donación:</strong> <span id="summaryDonationType">No hay datos
                                     disponibles.</span></p>
-                            <p><strong>Cantidad:</strong> <span id="summaryQuantity">0</span></p>
+                            <p style="color: #000; font-weight: bold;"><strong>Cantidad:</strong> <span id="summaryQuantity">0</span></p>
+                            <p style="color: #000; font-weight: bold;"><strong>Destino de donación:</strong> <span id="summaryRegion">No hay datos disponibles.</span></p>
                         </div>
                     @endif
                 </div>
@@ -85,18 +91,30 @@
                                             <option value="3">Ropa</option>
                                             <option value="4">Apoyo monetario</option>
                                         </select>
-                                        <label for="name">Tipo de Donación</label>
+                                        <label style="color: #000; font-weight: bold;" for="donation_type">Tipo de Donación</label>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-floating">
                                         <input type="number" class="form-control bg-light border-0" id="quantity"
                                             name="quantity" placeholder="Cantidad">
-                                        <label for="quantity">Cantidad</label>
+                                        <label for="quantity" style="color: #000; font-weight: bold;">Cantidad</label>
+                                    </div>
+                                </div>
+                               <div class="col-12">
+                                    <div class="form-floating">
+                                        <select id="regions" name="regions" placeholder="Destino de donación"
+                                            class="form-control bg-light border-0">
+                                            <option value="" disabled selected hidden></option>
+                                            <option value="1">Acapulco, Guerrero (Huracán Otis)</option>
+                                            <option value="2">Cancún, Yucatán (Huracán Milton)</option>
+                                            <option value="3">Cozumel, Quintana Roo (Huracán Beryl)</option>
+                                        </select>
+                                        <label style="color: #000; font-weight: bold;" for="regions">Destino de donación</label>
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <button class="btn btn-primary px-5" style="height: 60px;" type="submit">
+                                    <button class="btn btn-primary px-5" style="height: 60px; font-weight: bold;" type="submit">
                                         Registrar Donación
                                         <div class="d-inline-flex btn-sm-square bg-white text-primary rounded-circle ms-2">
                                             <i class="fa fa-arrow-right"></i>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Donation;
 use App\Models\DonationType;
+use App\Models\Region;
 use App\Models\User;
 use Dotenv\Util\Str;
 use Illuminate\Http\Request;
@@ -15,6 +16,7 @@ class DonationController extends Controller
      */
     public function index()
     {
+
         return view('donations.donations');
     }
 
@@ -35,8 +37,13 @@ class DonationController extends Controller
     {
         if ($request->isMethod('POST')) {
             $request->validate([
-                'donation_type' => 'required|max:50',
+                'donation_type' => 'required',
                 'quantity' => 'required|max:100',
+                'regions' => 'required',
+            ], [
+                'donation_type.required' => 'Selecciona un tipo de donación.',
+                'quantity.required' => 'Proporciona la cantidad que deseas donar.',
+                'regions.required' => 'Proporciona el lugar hacia donde quieres enviar tu donación.',
             ]);
             $email = session('user_email');
             $user = User::where('email', $email)->first();

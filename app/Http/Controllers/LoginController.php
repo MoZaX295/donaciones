@@ -14,7 +14,9 @@ class LoginController extends Controller
      */
     public function index()
     {
+        session()->forget(['donation_type', 'quantity']);
         return view('donations.login'); // Ruta de tu vista Blade de login
+
     }
 
     /**
@@ -26,20 +28,26 @@ class LoginController extends Controller
         $request->validate([
             'email' => 'required|email',
             'password' => 'required|max:32',
+        ], [
+            'email.required' => 'Proporciona tu correo electrónico.',
+            'password.required' => 'Proporciona tu contraseña.',
         ]);
          // Obtener el email del request
          $user_email = $request->input('email');
 
          // Buscar el usuario por correo electrónico
          $user = User::where('email', $user_email)->first();
- 
+
          // Verificar si el usuario existe
          if ($user) {
             // Verificar la contraseña
             if ($request->input('password') === $user->password) { // Comparar la contraseña sin codificar
                 // Almacenar el email en la sesión
-                session(['user_email' => $user_email]);
-    
+                session([
+                    'user_email' => $user_email,
+                    'user_name' => $user->first_name . " ". $user->last_name
+                ]);
+
                 // Redirigir al controlador de donaciones
                 return redirect()->route('donar.index')->with('success', 'Acceso exitoso.');
             } else {
