@@ -54,10 +54,11 @@ class DonationController extends Controller
             $donation->description = " ";
             $donation->user_id = $user->id;
             $donation->donation_type_id = $request->input('donation_type');
-            $donation->region_id = 1;
+            $donation->region_id = $request->input('regions');
             $donation->save();
             $donation_type = DonationType::where('id', $donation->donation_type_id)->first();
-            session(['donation_type' => $donation_type->donation_type, 'quantity' => $request->input('quantity')]);
+            $region = Region::where('id', $donation->region_id)->first();
+            session(['donation_type' => $donation_type->donation_type, 'quantity' => $request->input('quantity'), 'region' => $region->region]);
             return redirect()->back()->with('success', 'Tu donación a sido guardada correctamente, GRACIAS POR TU APORTACIÓN');
         }
     }

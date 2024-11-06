@@ -50,7 +50,7 @@
                             <p style="color: #000; font-weight: bold;"><strong>Tipo de Donación:</strong> <span
                                     id="summaryDonationType">{{ session('donation_type', 'No especificado') }}</span></p>
                             <p style="color: #000; font-weight: bold;"><strong>Cantidad:</strong> <span id="summaryQuantity">{{ session('quantity', '0') }}</span></p>
-                            <p style="color: #000; font-weight: bold;"><strong>Destino de donación:</strong> <span id="summaryRegion"></span></p>
+                            <p style="color: #000; font-weight: bold;"><strong>Destino de donación:</strong> <span id="summaryRegion">{{ session('region', 'No especificado') }}</span></p>
                         </div>
                     @else
                         <div id="resumen" style="display: none;">
