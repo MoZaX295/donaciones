@@ -13,3 +13,6 @@ Route::resource('iniciarsesion', LoginController::class);
 Route::get('/historial', function () {
     return view('donations/record');
 });
+Route::get('/admin/historial', function () {
+    return view('admin/record');
+});
