@@ -48,7 +48,7 @@ class DonationController extends Controller
             $email = session('user_email');
             $user = User::where('email', $email)->first();
             $donation = new Donation();
-            $donation->status = 1;
+            $donation->status = 0;
             $donation->quantity = $request->input('quantity');
             $donation->date = now();
             $donation->description = " ";
@@ -82,10 +82,8 @@ class DonationController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+
+
 
     /**
      * Remove the specified resource from storage.

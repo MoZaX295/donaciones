@@ -46,27 +46,35 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="text-center">
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td><button class="bg-primary" style="font-weight: bold;">Completado</button></td>
-                        </tr>
-                        <tr class="text-center">
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td><button class="bg-primary" style="font-weight: bold;">Completado</button></td>
-                        </tr>
-                        <tr class="text-center">
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td><button class="bg-pending" style="font-weight: bold;">Pendiente</button></td>
-                        </tr>
+                        @foreach ($donations as $donation)
+                            <tr class="text-center">
+                                <td>{{ $donation->date }}</td>
+                                <td>{{ $donation->donationType->donation_type }}</td>
+                                <td>{{ $donation->quantity }}</td>
+                                <td>{{ $donation->region->region }}</td>
+                                <td>
+                                    <form method="POST" action="{{ route('adminhistorial.update', $donation->id) }}"
+                                        class="d-inline">
+                                        @csrf
+                                        @method('PUT')
+                                        <input type="hidden" name="status" value="{{ $donation->status == 1 ? 0 : 1 }}">
+                                        <button type="button" onclick="confirmToggleStatus(this)"
+                                            class="{{ $donation->status == 1 ? 'bg-primary' : 'bg-pending' }} text-dark"
+                                            style="font-weight: bold;  ">
+                                            {{ $donation->status == 1 ? 'Completado' : 'Pendiente' }}
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                            <script>
+                                function confirmToggleStatus(button) {
+                                    if (confirm("¿Está seguro de que desea cambiar el estado?")) {
+                                        button.closest('form').submit();
+                                    }
+                                }
+                            </script>
+
+                        @endforeach
                     </tbody>
                 </table>
             </div>

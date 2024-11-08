@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DonationController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RecordAdminController;
 use App\Http\Controllers\UserController;
 use App\Models\Donation;
 use App\Models\User;
@@ -13,6 +14,5 @@ Route::resource('iniciarsesion', LoginController::class);
 Route::get('/historial', function () {
     return view('donations/record');
 });
-Route::get('/admin/historial', function () {
-    return view('admin/record');
-});
+Route::resource('adminhistorial', RecordAdminController::class);
+
